@@ -9,14 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ui</artifactId>
-    <groupId>self.erp.ui</groupId>
+    <artifactId>visitorservice</artifactId>
+    <groupId>self.erp.visitorservice</groupId>
 
-        <dependencies>
-            <dependency>
-                <groupId>self.erp.visitorservice</groupId>
-                <artifactId>visitorservice</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-        </dependencies>
 </project>

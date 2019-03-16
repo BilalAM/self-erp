@@ -76,8 +76,10 @@
             </plugin>
         </plugins>
     </build>
+
     <modules>
         <module>ui</module>
         <module>visitorservice</module>
+        <module>erpapplication</module>
     </modules>
 </project>

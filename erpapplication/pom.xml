@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>erpapplication</artifactId>
+    <groupId>self.erp.erpapplication </groupId>
     <dependencies>
         <dependency>
             <groupId>self.erp.visitorservice</groupId>

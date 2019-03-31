@@ -1,4 +1,4 @@
-package self.erp.commons;
+package self.erp.commons.restful;
 
 public interface RestfulHelper {
 

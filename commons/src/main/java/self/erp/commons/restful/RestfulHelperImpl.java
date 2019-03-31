@@ -1,4 +1,4 @@
-package self.erp.commons;
+package self.erp.commons.restful;
 
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

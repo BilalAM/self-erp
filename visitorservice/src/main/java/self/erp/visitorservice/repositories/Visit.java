@@ -1,6 +1,7 @@
 package self.erp.visitorservice.repositories;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,21 +16,27 @@ public class Visit {
     private int visitId;
 
     @Column(name = "VISIT_VISITOR")
+    @NotBlank(message = "Visitor Name Cannot Be Blank")
     private String visitorName;
 
     @Column(name = "FROM_STAMP")
+    @NotBlank(message = "The From Date Cannot Be Blank")
     private LocalDateTime fromDate;
 
     @Column(name = "TO_STAMP")
+    @NotBlank(message = "The End Date Cannot Be Blank")
     private LocalDateTime endDate;
 
     @Column(name = "VISIT_PURPOSE")
+    @NotBlank(message = "Visiting Purpose Cannot Be Blank!")
     private String visitPurpose;
 
     @Column(name = "VISIT_PURPOSE_DESCRIPTION")
+    @NotBlank(message = "Visiting purpose description Cannot Be Blank")
     private String visitPurposeDescription;
 
     @Column(name = "VISIT_PURPOSE_STATUS_TYPE")
+    @NotBlank(message = "The Visiting Purpose Status Type Cannot Be Blank")
     private String visitPurposeStatusType;
 
     public Visit(String visitorName, LocalDateTime fromDate, LocalDateTime endDate, String visitPurpose,

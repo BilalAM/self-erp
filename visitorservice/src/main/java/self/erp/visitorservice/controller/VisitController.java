@@ -1,6 +1,7 @@
 package self.erp.visitorservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import self.erp.visitorservice.repositories.Visit;
 import self.erp.visitorservice.repositories.VisitRepository;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,5 +29,12 @@ public class VisitController {
         LOGGER.log(Level.INFO, "Adding [ " + visit.toString() + " ]");
         visitRepository.save(visit);
         return new ResponseEntity<>("Added", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/visitors", method = RequestMethod.GET)
+    public ResponseEntity<List<Visit>> getAll() {
+        LOGGER.log(Level.INFO, "Getting all visitors");
+        List<Visit> allVisitors = visitRepository.findAll(Sort.by(Sort.Order.by("visitorName")));
+        return new ResponseEntity<>(allVisitors, HttpStatus.OK);
     }
 }

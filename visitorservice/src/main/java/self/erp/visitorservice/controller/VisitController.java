@@ -13,7 +13,8 @@ import self.erp.visitorservice.repositories.VisitRepository;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@RestController(value = "/erp/visits")
+@RestController
+@RequestMapping(value = "/visit")
 public class VisitController {
 
     private static final Logger LOGGER = Logger.getLogger("VisitController");

@@ -6,11 +6,11 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Schema_Visitor")
+@Table(name = "Schema_Visitors")
 public class Visit {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "VISIT_ID")
     private int visitId;
 
@@ -40,6 +40,10 @@ public class Visit {
         this.visitPurpose = visitPurpose;
         this.visitPurposeDescription = visitPurposeDescription;
         this.visitPurposeStatusType = visitPurposeStatusType;
+    }
+
+    public Visit() {
+
     }
 
     public int getVisitId() {

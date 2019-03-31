@@ -11,6 +11,11 @@
 
     <artifactId>commons</artifactId>
     <groupId>self.erp.commons</groupId>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

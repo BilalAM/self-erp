@@ -9,32 +9,25 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "Schema_Visitors")
 public class Visit {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "VISIT_ID")
     private int visitId;
-
     @Column(name = "VISIT_VISITOR")
     @NotBlank(message = "Visitor Name Cannot Be Blank")
     private String visitorName;
-
     @Column(name = "FROM_STAMP")
     @NotBlank(message = "The From Date Cannot Be Blank")
     private LocalDateTime fromDate;
-
     @Column(name = "TO_STAMP")
     @NotBlank(message = "The End Date Cannot Be Blank")
     private LocalDateTime endDate;
-
     @Column(name = "VISIT_PURPOSE")
     @NotBlank(message = "Visiting Purpose Cannot Be Blank!")
     private String visitPurpose;
-
     @Column(name = "VISIT_PURPOSE_DESCRIPTION")
     @NotBlank(message = "Visiting purpose description Cannot Be Blank")
     private String visitPurposeDescription;
-
     @Column(name = "VISIT_PURPOSE_STATUS_TYPE")
     @NotBlank(message = "The Visiting Purpose Status Type Cannot Be Blank")
     private String visitPurposeStatusType;
@@ -50,7 +43,6 @@ public class Visit {
     }
 
     public Visit() {
-
     }
 
     public int getVisitId() {

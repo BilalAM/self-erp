@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import jfxtras.scene.control.LocalDateTimeTextField?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="725.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="11.0" layoutY="308.0" prefHeight="271.0" prefWidth="703.0" />
+      <TextField fx:id="visitorName" layoutX="55.0" layoutY="57.0" prefHeight="26.0" prefWidth="204.0" promptText="Visitor Name" />
+      <TextField fx:id="visitPurpose" layoutX="55.0" layoutY="181.0" prefHeight="26.0" prefWidth="204.0" promptText="Visit Purpose" />
+      <TextArea fx:id="visitPurposeDescription" layoutX="354.0" layoutY="117.0" prefHeight="90.0" prefWidth="357.0" promptText="Further Description..if any" />
+      <RadioButton fx:id="visitCompletedFlag" layoutX="397.0" layoutY="61.0" mnemonicParsing="false" text="Completed" />
+      <RadioButton fx:id="visitInProgressFlag" layoutX="533.0" layoutY="61.0" mnemonicParsing="false" text="In Progress" />
+      <Button fx:id="saveVisitBtn" layoutX="268.0" layoutY="256.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" text="SAVE" />
+      <LocalDateTimeTextField fx:id="visitorFromDate" layoutX="55.0" layoutY="91.0" prefHeight="26.0" prefWidth="204.0" promptText="Visit started at" />
+      <LocalDateTimeTextField fx:id="visitorEndDate" layoutX="55.0" layoutY="136.0" prefHeight="26.0" prefWidth="204.0" promptText="Visit ended at" />
+   </children>
+</AnchorPane>

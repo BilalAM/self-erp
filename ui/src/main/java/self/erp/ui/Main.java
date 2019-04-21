@@ -13,6 +13,19 @@ import org.springframework.context.annotation.ComponentScan;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *  This is the main entry point of the Springboot JavaFX application .
+ *
+ *  The bean configuration and application context spring  "magic" happens inside
+ *  the init() step of the JavaFX life cycle where Springboot kicks in
+ *  and start configuring the beans and all.
+ *
+ *  This implementation has been done by taking
+ *
+ *  <a href="https://github.com/mvpjava/springboot-javafx-tutorial">link</a>
+ *
+ *   as a reference by github user mvpjava (https://github.com/mvpjava)
+ */
 @SpringBootApplication
 @ComponentScan(value = { "self.erp.commons.restful", "self.erp.ui.controllers" })
 public class Main extends Application {

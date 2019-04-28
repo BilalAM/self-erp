@@ -1,23 +1,25 @@
 package self.erp.commons.restful;
 
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 
 @Service
 public class RestfulHelperImpl implements RestfulHelper {
-    private static final RestTemplate restTemplate = new RestTemplate();
+
+    private Client client = ClientBuilder.newClient();
 
     @Override
     public int post(String url, Object o) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        return client.target(url).request(MediaType.APPLICATION_JSON).post(Entity.entity(o, MediaType.APPLICATION_JSON))
+                .getStatusInfo().getStatusCode();
+    }
 
-        HttpEntity<Object> entity = new HttpEntity<Object>(o, headers);
-        ResponseEntity<Object> responseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, Object.class);
-
-        return responseEntity.getStatusCode().value();
+    @Override
+    public Object get(String url) {
+        return client.target(url).request(MediaType.APPLICATION_JSON).get(Object.class);
     }
 }

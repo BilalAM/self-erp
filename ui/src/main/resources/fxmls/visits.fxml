@@ -12,7 +12,7 @@
       <TextArea fx:id="visitorVisitPurposeDescriptionField" layoutX="354.0" layoutY="117.0" prefHeight="90.0" prefWidth="357.0" promptText="Further Description..if any" />
       <RadioButton fx:id="completedFlag" layoutX="397.0" layoutY="61.0" mnemonicParsing="false" text="Completed" />
       <RadioButton fx:id="inProgressFlag" layoutX="533.0" layoutY="61.0" mnemonicParsing="false" text="In Progress" />
-      <Button fx:id="saveBtn" layoutX="268.0" layoutY="256.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" text="SAVE" onAction="#saveVisitAct"/>
+      <Button fx:id="saveBtn" layoutX="268.0" layoutY="256.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" text="SAVE" onAction="#getVisitsAction"/>
       <LocalDateTimeTextField fx:id="fromDateField" layoutX="55.0" layoutY="91.0" prefHeight="26.0" prefWidth="204.0" promptText="Visit started at" />
       <LocalDateTimeTextField fx:id="toDateField" layoutX="55.0" layoutY="136.0" prefHeight="26.0" prefWidth="204.0" promptText="Visit ended at" />
    </children>

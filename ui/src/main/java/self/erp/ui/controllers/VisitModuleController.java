@@ -9,12 +9,13 @@ import jfxtras.scene.control.LocalDateTimeTextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import self.erp.commons.restful.RestfulHelper;
+import self.erp.visitorservice.repositories.Visit;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Component
 public class VisitModuleController {
-
     private static final Logger LOGGER = Logger.getLogger("VisitModuleController");
 
     @Autowired
@@ -38,9 +39,10 @@ public class VisitModuleController {
     private Button saveBtn;
 
     @FXML
-    private void saveVisitAct() {
-        String a = "halla";
-        restfulHelper.post("http://localhost:8880/erp/visit/visitors", a);
+    private void getVisitsAction() {
+        List<Visit> visitors = (List<Visit>) restfulHelper.get("http://localhost:8880/erp/visit/visitors");
+        for (Visit visit : visitors) {
+            visitorNameField.appendText(visit.toString());
+        }
     }
-
 }

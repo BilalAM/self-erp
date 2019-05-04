@@ -19,7 +19,7 @@ public class RestfulHelperImpl implements RestfulHelper {
     }
 
     @Override
-    public Object get(String url) {
-        return client.target(url).request(MediaType.APPLICATION_JSON).get(Object.class);
+    public Object get(String url, Class clazz) {
+        return client.target(url).request(MediaType.APPLICATION_JSON).get(clazz);
     }
 }

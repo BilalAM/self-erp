@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import self.erp.commons.restful.RestfulHelper;
 import self.erp.visitorservice.repositories.Visit;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 @Component
@@ -40,9 +39,16 @@ public class VisitModuleController {
 
     @FXML
     private void getVisitsAction() {
-        List<Visit> visitors = (List<Visit>) restfulHelper.get("http://localhost:8880/erp/visit/visitors");
+
+        Visit[] visitors = (Visit[]) restfulHelper.get("http://localhost:8880/erp/visit/visitors", Visit[].class);
+
         for (Visit visit : visitors) {
-            visitorNameField.appendText(visit.toString());
+            visitorNameField.appendText(visit.getVisitorName());
+            visitorVisitPurposeField.appendText(visit.getVisitPurpose());
+            visitorVisitPurposeDescriptionField.appendText(visit.getVisitPurposeDescription());
+            fromDateField.setText(visit.getFromDate().toString());
+            toDateField.setText(visit.getEndDate().toString());
+
         }
     }
 }

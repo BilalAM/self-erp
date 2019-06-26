@@ -1,5 +1,9 @@
 package self.erp.visitorservice.repositories;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -21,10 +25,10 @@ public class Visit implements Serializable {
     @NotBlank(message = "Visitor Name Cannot Be Blank")
     private String visitorName;
     @Column(name = "FROM_STAMP")
-    @NotBlank(message = "The From Date Cannot Be Blank")
+    @NotBlank(message = "The From Date Cannot Be Blank") @JsonSerialize(using = LocalDateTimeSerializer.class) @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime fromDate;
     @Column(name = "TO_STAMP")
-    @NotBlank(message = "The End Date Cannot Be Blank")
+    @NotBlank(message = "The End Date Cannot Be Blank") @JsonSerialize(using = LocalDateTimeSerializer.class) @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime endDate;
     @Column(name = "VISIT_PURPOSE")
     @NotBlank(message = "Visiting Purpose Cannot Be Blank!")

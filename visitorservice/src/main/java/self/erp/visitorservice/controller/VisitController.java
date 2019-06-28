@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import self.erp.visitorservice.repositories.Visit;
@@ -22,7 +23,7 @@ public class VisitController {
     @Autowired
     private VisitRepository visitRepository;
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+        @RequestMapping(value = "/new", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> insert(@RequestBody Visit visit) {
         LOGGER.log(Level.INFO, "Adding [ " + visit.toString() + " ]");
         visitRepository.save(visit);

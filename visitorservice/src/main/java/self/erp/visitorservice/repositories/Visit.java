@@ -40,6 +40,7 @@ public class Visit implements Serializable {
     @NotBlank(message = "The Visiting Purpose Status Type Cannot Be Blank")
     private String visitPurposeStatusType;
 
+
     public Visit(String visitorName, LocalDateTime fromDate, LocalDateTime endDate, String visitPurpose,
             String visitPurposeDescription, String visitPurposeStatusType) {
         this.visitorName = visitorName;
@@ -51,6 +52,10 @@ public class Visit implements Serializable {
     }
 
     public Visit() {
+    }
+
+    public Visit(String foo) {
+
     }
 
     public int getVisitId() {

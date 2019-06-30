@@ -1,10 +1,8 @@
 package self.erp.ui.controllers;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import jfxtras.scene.control.LocalDateTimeTextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,6 +36,14 @@ public class VisitModuleController {
     private RadioButton inProgressFlag;
     @FXML
     private Button saveBtn;
+
+        @FXML private TableView visitGrid;
+
+        @FXML public void initialize() {
+                Visit[] visitors = (Visit[]) restfulHelper
+                        .get("http://localhost:8880/erp/visit/visitors", Visit[].class);
+                visitGrid.setItems(FXCollections.observableArrayList(visitors));
+        }
 
     @FXML private void getVisitsAction() {
             Visit[] visitors = (Visit[]) restfulHelper.get("http://localhost:8880/erp/visit/visitors", Visit[].class);

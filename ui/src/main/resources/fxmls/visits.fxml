@@ -8,12 +8,11 @@
        <TableView fx:id="visitGrid" editable="true" layoutX="11.0" layoutY="308.0" prefHeight="271.0" prefWidth="703.0"
                   tableMenuButtonVisible="true">
            <columns>
-               <TableColumn fx:id="idCol" prefWidth="75.0" text="Serial ID"/>
-               <TableColumn fx:id="nameCol" prefWidth="67.0" text="Visitor Name"/>
-               <TableColumn fx:id="fromCol" prefWidth="83.0" text="Visit From"/>
-               <TableColumn fx:id="toCol" prefWidth="75.0" text="Visit Purpose"/>
-               <TableColumn fx:id="statusCol" prefWidth="75.0" text="Status"/>
-               <TableColumn fx:id="notesCol" prefWidth="75.0" text="Notes "/>
+               <TableColumn fx:id="idCol" prefWidth="37.0" resizable="false" text="ID"/>
+               <TableColumn fx:id="nameCol" prefWidth="150.0" resizable="false" text="Visitor Name"/>
+               <TableColumn fx:id="fromCol" prefWidth="150.0" resizable="false" text="Visit From"/>
+               <TableColumn fx:id="toCol" prefWidth="150.0" resizable="false" text="Visit To"/>
+               <TableColumn fx:id="purpCol" prefWidth="199.0" resizable="false" text="Visit Purpose"/>
            </columns>
            <columnResizePolicy>
                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>

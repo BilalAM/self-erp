@@ -1,8 +1,10 @@
 package self.erp.ui.controllers;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import jfxtras.scene.control.LocalDateTimeTextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,12 +39,18 @@ public class VisitModuleController {
     @FXML
     private Button saveBtn;
 
-        @FXML private TableView visitGrid;
+        @FXML private TableView<Visit> visitGrid;
 
         @FXML public void initialize() {
                 Visit[] visitors = (Visit[]) restfulHelper
                         .get("http://localhost:8880/erp/visit/visitors", Visit[].class);
-                visitGrid.setItems(FXCollections.observableArrayList(visitors));
+                ObservableList<Visit> list = FXCollections.observableArrayList(visitors);
+                visitGrid.setItems(list);
+                visitGrid.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("visitId"));
+                visitGrid.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("visitorName"));
+                visitGrid.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("fromDate"));
+                visitGrid.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("endDate"));
+                visitGrid.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("visitPurpose"));
         }
 
     @FXML private void getVisitsAction() {

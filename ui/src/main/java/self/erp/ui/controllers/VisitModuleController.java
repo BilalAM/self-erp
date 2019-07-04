@@ -1,5 +1,6 @@
 package self.erp.ui.controllers;
 
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import self.erp.commons.restful.RestfulHelper;
+import self.erp.ui.fxutils.ComponentUtils;
 import self.erp.visitorservice.repositories.Visit;
 
 import javax.ws.rs.core.Response;
@@ -39,6 +41,14 @@ public class VisitModuleController {
     @FXML
     private Button saveBtn;
 
+        @FXML private Label scsMsgLabel;
+
+        @FXML private Label errorMsgLabel;
+
+
+
+
+
         @FXML private TableView<Visit> visitGrid;
 
         @FXML public void initialize() {
@@ -62,6 +72,9 @@ public class VisitModuleController {
                     fromDateField.setText(visit.getFromDate().toString());
                     toDateField.setText(visit.getEndDate().toString());
             }
+            scsMsgLabel.setVisible(true);
+            FadeTransition transitionEffect = ComponentUtils.createTransition(scsMsgLabel, 1.6, false);
+            transitionEffect.play();
     }
 
         @FXML private void addVisitAction() {
@@ -78,8 +91,9 @@ public class VisitModuleController {
                 }
                 Response response = restfulHelper.post("http://localhost:8880/erp/visit/new", visit);
                 if (!(response.getStatus() == HttpStatus.OK.value())) {
-                        // display a red message on UI
+
                 } else {
+                        errorMsgLabel.setVisible(true);
                         // display a green label , record [ record.toString() ] added
                 }
         }

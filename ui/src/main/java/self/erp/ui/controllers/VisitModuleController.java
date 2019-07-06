@@ -61,8 +61,12 @@ import java.util.logging.Logger;
                 }
         }
 
+        /**
+         * Displays a green label message if the response is 200 (added successfully).
+         * Displays a red label message if the response is not 200 (not added).
+         */
         @FXML private void addVisitAction() {
-                FadeTransition fadeTransition = null;
+                FadeTransition fadeTransition;
                 Visit visit = new Visit();
                 visit.setVisitorName(visitorNameField.getText());
                 visit.setVisitPurpose(visitorVisitPurposeField.getText());
@@ -76,15 +80,13 @@ import java.util.logging.Logger;
                 }
                 Response response = restfulHelper.post("http://localhost:8880/erp/visit/new", visit);
                 if (!(response.getStatus() == HttpStatus.OK.value())) {
-                        scsMsgLabel.setVisible(true);
-                        fadeTransition = ComponentUtils.createTransition(scsMsgLabel, 1.6, false);
-                        fadeTransition.play();
-                        scsMsgLabel.setVisible(false);
-                } else {
                         errorMsgLabel.setVisible(true);
                         fadeTransition = ComponentUtils.createTransition(errorMsgLabel, 1.6, false);
                         fadeTransition.play();
-                        errorMsgLabel.setVisible(false);
+                } else {
+                        scsMsgLabel.setVisible(true);
+                        fadeTransition = ComponentUtils.createTransition(scsMsgLabel, 1.6, false);
+                        fadeTransition.play();
                 }
         }
 }

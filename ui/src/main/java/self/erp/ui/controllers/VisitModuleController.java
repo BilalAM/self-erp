@@ -14,7 +14,9 @@ import self.erp.commons.restful.RestfulHelper;
 import self.erp.ui.fxutils.ComponentUtils;
 import self.erp.visitorservice.repositories.Visit;
 
+import javax.ws.rs.ProcessingException;
 import javax.ws.rs.core.Response;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Component public class VisitModuleController {
@@ -78,14 +80,24 @@ import java.util.logging.Logger;
                 } else if (inProgressFlag.isSelected()) {
                         visit.setVisitPurposeStatusType("In Progress");
                 }
-                Response response = restfulHelper.post("http://localhost:8880/erp/visit/new", visit);
-                if (!(response.getStatus() == HttpStatus.OK.value())) {
+                Response response = null;
+                try {
+                        response = restfulHelper.post("http://localhost:8880/erp/visit/new", visit);
+                } catch (ProcessingException procException) {
+                        LOGGER.log(Level.SEVERE, "Error , see logs", procException);
                         errorMsgLabel.setVisible(true);
-                        fadeTransition = ComponentUtils.createTransition(errorMsgLabel, 1.6, false);
+                        errorMsgLabel.setText("Connection error has occurred !");
+                }
+                if (!(response.getStatus() == HttpStatus.OK.value())) {
+                        scsMsgLabel.setVisible(false);
+                        errorMsgLabel.setVisible(true);
+                        errorMsgLabel.setText("Unable to process request !");
+                        fadeTransition = ComponentUtils.createTransition(errorMsgLabel, 1.9, false);
                         fadeTransition.play();
                 } else {
+                        errorMsgLabel.setVisible(false);
                         scsMsgLabel.setVisible(true);
-                        fadeTransition = ComponentUtils.createTransition(scsMsgLabel, 1.6, false);
+                        fadeTransition = ComponentUtils.createTransition(scsMsgLabel, 1.9, false);
                         fadeTransition.play();
                 }
         }

@@ -51,18 +51,6 @@ import java.util.logging.Logger;
                 visitGrid.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("visitPurpose"));
         }
 
-        @FXML private void getVisitsAction() {
-                Visit[] visitors = (Visit[]) restfulHelper
-                        .get("http://localhost:8880/erp/visit/visitors", Visit[].class);
-                for (Visit visit : visitors) {
-                        visitorNameField.appendText(visit.getVisitorName());
-                        visitorVisitPurposeField.appendText(visit.getVisitPurpose());
-                        visitorVisitPurposeDescriptionField.appendText(visit.getVisitPurposeDescription());
-                        fromDateField.setText(visit.getFromDate().toString());
-                        toDateField.setText(visit.getEndDate().toString());
-                }
-        }
-
         /**
          * Displays a green label message if the response is 200 (added successfully).
          * Displays a red label message if the response is not 200 (not added).
@@ -102,7 +90,6 @@ import java.util.logging.Logger;
                         errorMsgLabel.setText("Unable to process request !");
                         fadeTransition = ComponentUtils.createTransition(errorMsgLabel, 1.9, false);
                         fadeTransition.play();
-
                 }
         }
 }

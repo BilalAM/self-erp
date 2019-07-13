@@ -2,6 +2,7 @@ package self.erp.ui.fxutils;
 
 import javafx.animation.FadeTransition;
 import javafx.scene.Node;
+import javafx.scene.control.TextInputControl;
 import javafx.util.Duration;
 
 /**
@@ -31,5 +32,16 @@ public class ComponentUtils {
                         transition.setToValue(0.0);
                 }
                 return transition;
+        }
+
+        /**
+         * Clears textareas and textfields of its values .
+         *
+         * @param textInputControls : Can be either a single or multiple TextArea(s) or TextField(s)
+         */
+        public static void clearTextboxes(TextInputControl... textInputControls){
+                for(TextInputControl textInputControl  : textInputControls){
+                        textInputControl.clear();
+                }
         }
 }

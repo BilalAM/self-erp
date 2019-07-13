@@ -77,12 +77,17 @@ import java.util.logging.Logger;
                         errorMsgLabel.setVisible(true);
                         errorMsgLabel.setText("Connection error has occurred !");
                 }
+                // if all went OK with the request.
                 if ((response.getStatus() == HttpStatus.OK.value())) {
                         errorMsgLabel.setVisible(false);
                         scsMsgLabel.setVisible(true);
+                        // play green transition
                         fadeTransition = ComponentUtils.createTransition(scsMsgLabel, 1.9, false);
                         fadeTransition.play();
+                        // update the grid.
                         visitGrid.getItems().add(visit);
+                        // clear the fields.
+                        ComponentUtils.clearTextboxes(visitorNameField,visitorVisitPurposeField,visitorVisitPurposeDescriptionField);
 
                 } else {
                         scsMsgLabel.setVisible(false);

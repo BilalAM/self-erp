@@ -12,7 +12,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Schema_Visitors")
+@Table(name = "Schema_Visitors") @NamedQueries({
+        @NamedQuery(name = "VISITORS.getLastVisitID", query = "SELECT MAX(id) as max_id FROM Schema_Visitors") })
 public class Visit implements Serializable {
 
     private static final long serialVersionUID = 1L;

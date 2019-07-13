@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 @Component public class VisitModuleController {
         private static final Logger LOGGER = Logger.getLogger("VisitModuleController");
-
+        private ObservableList<Visit> list = null;
         @Autowired private RestfulHelper restfulHelper;
 
         @FXML private TextField visitorNameField;
@@ -42,7 +42,7 @@ import java.util.logging.Logger;
         @FXML public void initialize() {
                 Visit[] visitors = (Visit[]) restfulHelper
                         .get("http://localhost:8880/erp/visit/visitors", Visit[].class);
-                ObservableList<Visit> list = FXCollections.observableArrayList(visitors);
+                list = FXCollections.observableArrayList(visitors);
                 visitGrid.setItems(list);
                 visitGrid.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("visitId"));
                 visitGrid.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("visitorName"));
@@ -75,6 +75,7 @@ import java.util.logging.Logger;
                 visit.setVisitPurposeDescription(visitorVisitPurposeDescriptionField.getText());
                 visit.setFromDate(fromDateField.getLocalDateTime());
                 visit.setEndDate(toDateField.getLocalDateTime());
+
                 if (completedFlag.isSelected()) {
                         visit.setVisitPurposeStatusType("Completed");
                 } else if (inProgressFlag.isSelected()) {
@@ -88,17 +89,20 @@ import java.util.logging.Logger;
                         errorMsgLabel.setVisible(true);
                         errorMsgLabel.setText("Connection error has occurred !");
                 }
-                if (!(response.getStatus() == HttpStatus.OK.value())) {
+                if ((response.getStatus() == HttpStatus.OK.value())) {
+                        errorMsgLabel.setVisible(false);
+                        scsMsgLabel.setVisible(true);
+                        fadeTransition = ComponentUtils.createTransition(scsMsgLabel, 1.9, false);
+                        fadeTransition.play();
+                        visitGrid.getItems().add(visit);
+
+                } else {
                         scsMsgLabel.setVisible(false);
                         errorMsgLabel.setVisible(true);
                         errorMsgLabel.setText("Unable to process request !");
                         fadeTransition = ComponentUtils.createTransition(errorMsgLabel, 1.9, false);
                         fadeTransition.play();
-                } else {
-                        errorMsgLabel.setVisible(false);
-                        scsMsgLabel.setVisible(true);
-                        fadeTransition = ComponentUtils.createTransition(scsMsgLabel, 1.9, false);
-                        fadeTransition.play();
+
                 }
         }
 }

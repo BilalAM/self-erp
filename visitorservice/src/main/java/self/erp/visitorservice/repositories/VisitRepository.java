@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VisitRepository extends JpaRepository<Visit, Integer> {
-        int getLastVisitID();
+    int getLastVisitID();
 }

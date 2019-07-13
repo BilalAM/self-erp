@@ -13,7 +13,8 @@ public class RestfulHelperImpl implements RestfulHelper {
 
     private Client client = ClientBuilder.newClient();
 
-    @Override public Response post(String url, Object o) {
+    @Override
+    public Response post(String url, Object o) {
         return client.target(url).request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(o, MediaType.APPLICATION_JSON));
     }

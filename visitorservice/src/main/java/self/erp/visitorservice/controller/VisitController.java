@@ -20,9 +20,10 @@ public class VisitController {
 
     private static final Logger LOGGER = Logger.getLogger("VisitController");
 
-    @Autowired private VisitRepositoryImpl visitRepository;
+    @Autowired
+    private VisitRepositoryImpl visitRepository;
 
-        @RequestMapping(value = "/new", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/new", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> insert(@RequestBody Visit visit) {
         LOGGER.log(Level.INFO, "Adding [ " + visit.toString() + " ]");
         visitRepository.save(visit);

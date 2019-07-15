@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import self.erp.visitorservice.repositories.Visit;
-import self.erp.visitorservice.repositories.VisitRepositoryImpl;
+import self.erp.visitorservice.repositories.VisitRepository;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -21,7 +21,7 @@ public class VisitController {
     private static final Logger LOGGER = Logger.getLogger("VisitController");
 
     @Autowired
-    private VisitRepositoryImpl visitRepository;
+    private VisitRepository visitRepository;
 
     @RequestMapping(value = "/new", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> insert(@RequestBody Visit visit) {
@@ -45,8 +45,6 @@ public class VisitController {
             if (StringUtils.isEmpty(sortByField)) {
                 LOGGER.log(Level.WARNING, "No sorting field found");
                 allVisits = visitRepository.findAll(Sort.by(Sort.Order.by("visitorName")));
-                LOGGER.log(Level.SEVERE, "Getting the last id of records");
-                LOGGER.log(Level.INFO, "Last record id is [ " + visitRepository.getLastVisitID() + " ] ");
             } else {
                 LOGGER.log(Level.WARNING, "Bringing records according to [ " + sortByField + " ]");
                 allVisits = visitRepository.findAll(Sort.by(Sort.Order.by(sortByField)));
@@ -59,8 +57,17 @@ public class VisitController {
         return new ResponseEntity<>(allVisits, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public ResponseEntity<Visit> getOne() {
-        return null;
+    @RequestMapping(value = "/lastVisitID", method = RequestMethod.GET)
+    public ResponseEntity<Integer> getLastVisitID() {
+        int lastVisitID;
+        try {
+            LOGGER.log(Level.INFO, "I have been summoned ! :D ");
+            lastVisitID = visitRepository.getlastVisitID();
+            return new ResponseEntity<>(lastVisitID, HttpStatus.OK);
+        } catch (Exception e) {
+            String errorMessage = "Unable to find last ID of visitor record";
+            LOGGER.log(Level.INFO, errorMessage, e);
+            throw new RuntimeException(errorMessage);
+        }
     }
 }

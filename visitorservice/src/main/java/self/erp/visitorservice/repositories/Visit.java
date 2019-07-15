@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Schema_Visitors")
-@NamedQueries({
-        @NamedQuery(name = "VISITORS.getLastVisitID", query = "SELECT MAX(id) as max_id FROM Schema_Visitors") })
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "VISITORS.getLastVisitID", query = "SELECT MAX(VISIT_ID) AS max_id FROM Schema_Visitors", resultClass = Visit.class) })
 public class Visit implements Serializable {
 
     private static final long serialVersionUID = 1L;

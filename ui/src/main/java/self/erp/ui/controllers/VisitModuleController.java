@@ -63,7 +63,6 @@ public class VisitModuleController {
         visitGrid.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("endDate"));
         visitGrid.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("visitPurpose"));
         int lastVisitID = (Integer) restfulHelper.get("http://localhost:8880/erp/visit/lastVisitID", Integer.class);
-        LOGGER.log(Level.SEVERE, "--->" + lastVisitID);
     }
 
     /**

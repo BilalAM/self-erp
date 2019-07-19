@@ -2,7 +2,7 @@ package self.erp.visitorservice.repositories;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 public class VisitRepositoryCustomImpl implements VisitRepositoryCustom {
 
@@ -11,8 +11,7 @@ public class VisitRepositoryCustomImpl implements VisitRepositoryCustom {
 
     @Override
     public int getlastVisitID() {
-        Query lastIdQuery = emManager.createNamedQuery("VISITORS.getLastVisitID");
-        int lastId = lastIdQuery.getFirstResult();
-        return lastId;
+        TypedQuery<Integer> lastIdQuery = emManager.createNamedQuery("VISITORS.getLastVisitID", Integer.class);
+        return lastIdQuery.getSingleResult();
     }
 }

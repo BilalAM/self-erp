@@ -61,7 +61,6 @@ public class VisitController {
     public ResponseEntity<Integer> getLastVisitID() {
         int lastVisitID;
         try {
-            LOGGER.log(Level.INFO, "I have been summoned ! :D ");
             lastVisitID = visitRepository.getlastVisitID();
             return new ResponseEntity<>(lastVisitID, HttpStatus.OK);
         } catch (Exception e) {

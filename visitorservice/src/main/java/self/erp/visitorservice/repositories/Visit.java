@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "Schema_Visitors")
 @NamedNativeQueries({
-        @NamedNativeQuery(name = "VISITORS.getLastVisitID", query = "SELECT MAX(VISIT_ID) AS max_id FROM Schema_Visitors", resultClass = Visit.class) })
+        @NamedNativeQuery(name = "VISITORS.getLastVisitID", query = "SELECT MAX(VISIT_ID) AS max_id FROM Schema_Visitors", resultSetMapping = "visitorsLastID") })
+@SqlResultSetMapping(name = "visitorsLastID", columns = @ColumnResult(name = "max_id", type = Integer.class))
 public class Visit implements Serializable {
 
     private static final long serialVersionUID = 1L;

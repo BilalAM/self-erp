@@ -2,44 +2,56 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
 <?import jfxtras.scene.control.LocalDateTimeTextField?>
+<?import jfxtras.scene.control.LocalTimePicker?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="725.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="self.erp.ui.controllers.VisitModuleController">
    <children>
-       <TableView fx:id="visitGrid" editable="true" layoutX="11.0" layoutY="308.0" prefHeight="271.0" prefWidth="703.0"
-                  tableMenuButtonVisible="true">
+       <TableView fx:id="visitGrid" editable="true" layoutX="11.0" layoutY="308.0" prefHeight="271.0" prefWidth="703.0" tableMenuButtonVisible="true">
            <columns>
-               <TableColumn fx:id="idCol" prefWidth="37.0" resizable="false" text="ID"/>
-               <TableColumn fx:id="nameCol" prefWidth="150.0" resizable="false" text="Visitor Name"/>
-               <TableColumn fx:id="fromCol" prefWidth="150.0" resizable="false" text="Visit From"/>
-               <TableColumn fx:id="toCol" prefWidth="150.0" resizable="false" text="Visit To"/>
-               <TableColumn fx:id="purpCol" prefWidth="199.0" resizable="false" text="Visit Purpose"/>
+               <TableColumn fx:id="nameCol" prefWidth="150.0" resizable="false" text="Visitor Name" />
+               <TableColumn fx:id="fromCol" prefWidth="150.0" resizable="false" text="Visit From" />
+               <TableColumn fx:id="toCol" prefWidth="150.0" resizable="false" text="Visit To" />
+               <TableColumn fx:id="purpCol" prefWidth="199.0" resizable="false" text="Visit Purpose" />
            </columns>
            <columnResizePolicy>
-               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
            </columnResizePolicy>
        </TableView>
-       <TextField fx:id="visitorNameField" layoutX="55.0" layoutY="57.0" prefHeight="26.0" prefWidth="204.0"
-                  promptText="Visitor Name"/>
-      <TextField fx:id="visitorVisitPurposeField" layoutX="55.0" layoutY="181.0" prefHeight="26.0" prefWidth="204.0" promptText="Visit Purpose" />
+       <TextField fx:id="visitorNameField" layoutX="55.0" layoutY="57.0" prefHeight="26.0" prefWidth="204.0" promptText="Visitor Name" />
+      <TextField fx:id="visitorVisitPurposeField" layoutX="55.0" layoutY="91.0" prefHeight="26.0" prefWidth="204.0" promptText="Visit Purpose" />
       <TextArea fx:id="visitorVisitPurposeDescriptionField" layoutX="354.0" layoutY="117.0" prefHeight="90.0" prefWidth="357.0" promptText="Further Description..if any" />
       <RadioButton fx:id="completedFlag" layoutX="397.0" layoutY="61.0" mnemonicParsing="false" text="Completed" />
       <RadioButton fx:id="inProgressFlag" layoutX="533.0" layoutY="61.0" mnemonicParsing="false" text="In Progress" />
-       <Button fx:id="saveBtn" layoutX="267.0" layoutY="251.0" mnemonicParsing="false" onAction="#addVisitAction"
-               prefHeight="34.0" prefWidth="153.0" text="SAVE"/>
-      <LocalDateTimeTextField fx:id="fromDateField" layoutX="55.0" layoutY="91.0" prefHeight="26.0" prefWidth="204.0" promptText="Visit started at" />
-      <LocalDateTimeTextField fx:id="toDateField" layoutX="55.0" layoutY="136.0" prefHeight="26.0" prefWidth="204.0" promptText="Visit ended at" />
-       <Label fx:id="errorMsgLabel" layoutX="55.0" layoutY="251.0" text="Failed To Add Record" textFill="RED"
-              visible="false">
+       <Button fx:id="saveBtn" layoutX="267.0" layoutY="251.0" mnemonicParsing="false" onAction="#addVisitAction" prefHeight="34.0" prefWidth="153.0" text="SAVE" />
+      <LocalDateTimeTextField fx:id="fromDateField" layoutX="486.0" layoutY="219.0" prefHeight="26.0" prefWidth="204.0" promptText="Visit started at" />
+      <LocalDateTimeTextField fx:id="toDateField" layoutX="486.0" layoutY="255.0" prefHeight="26.0" prefWidth="204.0" promptText="Visit ended at" />
+       <Label fx:id="errorMsgLabel" layoutX="55.0" layoutY="251.0" text="Failed To Add Record" textFill="RED" visible="false">
            <font>
-               <Font name="Droid Sans" size="15.0"/>
+               <Font name="Droid Sans" size="15.0" />
            </font>
        </Label>
-       <Label fx:id="scsMsgLabel" layoutX="55.0" layoutY="251.0" text="Record Added !" textFill="#17941b"
-              visible="false">
+       <Label fx:id="scsMsgLabel" layoutX="55.0" layoutY="251.0" text="Record Added !" textFill="#17941b" visible="false">
            <font>
-               <Font name="Droid Sans Bold" size="15.0"/>
+               <Font name="Droid Sans Bold" size="15.0" />
            </font>
        </Label>
+      <LocalTimePicker fx:id="fromTimeField" layoutX="117.0" layoutY="117.0" prefHeight="76.0" prefWidth="142.0" scaleZ="15.0" />
+      <Label fx:id="todayDateLabel" layoutX="399.0" layoutY="28.0" prefHeight="29.0" prefWidth="224.0">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <LocalTimePicker fx:id="toTimeField" layoutX="117.0" layoutY="194.0" prefHeight="76.0" prefWidth="142.0" />
+      <Label layoutX="55.0" layoutY="139.0" prefHeight="16.0" prefWidth="95.0" text="From">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="55.0" layoutY="224.0" prefHeight="16.0" prefWidth="95.0" text="To">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

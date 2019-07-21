@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import jfxtras.scene.control.LocalDateTimeTextField;
+import jfxtras.scene.control.LocalTimePicker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,10 @@ import self.erp.visitorservice.repositories.Visit;
 
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.core.Response;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +28,8 @@ import java.util.logging.Logger;
 public class VisitModuleController {
     private static final Logger LOGGER = Logger.getLogger("VisitModuleController");
     private ObservableList<Visit> list = null;
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     @Autowired
     private RestfulHelper restfulHelper;
 
@@ -36,6 +43,13 @@ public class VisitModuleController {
     private LocalDateTimeTextField fromDateField;
     @FXML
     private LocalDateTimeTextField toDateField;
+
+    @FXML
+    private LocalTimePicker fromTimeField;
+
+    @FXML
+    private LocalTimePicker toTimeField;
+
     @FXML
     private RadioButton completedFlag;
     @FXML
@@ -50,19 +64,23 @@ public class VisitModuleController {
     private Label errorMsgLabel;
 
     @FXML
+    private Label todayDateLabel;
+
+    @FXML
     private TableView<Visit> visitGrid;
 
     @FXML
     public void initialize() {
+        todayDateLabel.setText(LocalDate.now().format(DATE_FORMAT));
         Visit[] visitors = (Visit[]) restfulHelper.get("http://localhost:8880/erp/visit/visitors", Visit[].class);
         list = FXCollections.observableArrayList(visitors);
         visitGrid.setItems(list);
-        visitGrid.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("visitId"));
-        visitGrid.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("visitorName"));
-        visitGrid.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("fromDate"));
-        visitGrid.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("endDate"));
-        visitGrid.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("visitPurpose"));
+        visitGrid.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("visitorName"));
+        visitGrid.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("fromDate"));
+        visitGrid.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        visitGrid.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("visitPurpose"));
         int lastVisitID = (Integer) restfulHelper.get("http://localhost:8880/erp/visit/lastVisitID", Integer.class);
+
     }
 
     /**
@@ -72,12 +90,18 @@ public class VisitModuleController {
     @FXML
     private void addVisitAction() {
         FadeTransition fadeTransition;
+        LocalDate todayDateParsed = LocalDate.parse(todayDateLabel.getText(), DATE_FORMAT);
+        LocalTime toTimeParsed = toTimeField.getLocalTime();
+        LocalTime fromTimeParsed = fromTimeField.getLocalTime();
+        LocalDateTime fromDateTimeParsed = LocalDateTime.of(todayDateParsed, fromTimeParsed);
+        LocalDateTime toDateTimeParsed = LocalDateTime.of(todayDateParsed, toTimeParsed);
+
         Visit visit = new Visit();
         visit.setVisitorName(visitorNameField.getText());
         visit.setVisitPurpose(visitorVisitPurposeField.getText());
         visit.setVisitPurposeDescription(visitorVisitPurposeDescriptionField.getText());
-        visit.setFromDate(fromDateField.getLocalDateTime());
-        visit.setEndDate(toDateField.getLocalDateTime());
+        visit.setFromDate(fromDateTimeParsed);
+        visit.setEndDate(toDateTimeParsed);
 
         if (completedFlag.isSelected()) {
             visit.setVisitPurposeStatusType("Completed");

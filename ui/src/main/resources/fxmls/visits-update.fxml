@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="14.0" layoutY="51.0" prefHeight="16.0" prefWidth="95.0" text="Visitor">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="100.0" prefHeight="16.0" prefWidth="95.0" text="Purpose ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="150.0" prefHeight="25.0" prefWidth="122.0" text="Visited At">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="visitorNameField1" layoutX="132.0" layoutY="96.0" prefHeight="33.0" prefWidth="204.0" promptText="Visitor Name" />
+      <TextField fx:id="visitorNameField11" layoutX="132.0" layoutY="47.0" prefHeight="33.0" prefWidth="204.0" promptText="Visitor Name" />
+      <TextField fx:id="visitorNameField12" layoutX="132.0" layoutY="146.0" prefHeight="33.0" prefWidth="204.0" promptText="Visitor Name" />
+      <Label layoutX="14.0" layoutY="200.0" prefHeight="25.0" prefWidth="122.0" text="Visited At">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="visitorNameField121" layoutX="132.0" layoutY="196.0" prefHeight="33.0" prefWidth="204.0" promptText="Visitor Name" />
+      <Label layoutX="16.0" layoutY="256.0" prefHeight="25.0" prefWidth="166.0" text="Further Notes">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="visitorVisitPurposeDescriptionField" layoutX="16.0" layoutY="295.0" prefHeight="90.0" prefWidth="467.0" promptText="Further Description..if any" />
+      <Button fx:id="saveBtn" layoutX="33.0" layoutY="400.0" mnemonicParsing="false" onAction="#updateVisitModal" prefHeight="34.0" prefWidth="153.0" text="CANCEL" />
+      <Button fx:id="saveBtn1" layoutX="313.0" layoutY="400.0" mnemonicParsing="false" onAction="#updateVisitModal" prefHeight="34.0" prefWidth="153.0" text="SAVE" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="33.0" layoutX="-1.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
+      <Label layoutX="182.0" layoutY="8.0" text="Update Record" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

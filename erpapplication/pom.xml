@@ -51,6 +51,18 @@
                     <mainClass>zong.Main</mainClass>
                 </configuration>
             </plugin>
+
+                    <plugin>
+                        <groupId>net.revelc.code.formatter</groupId>
+                        <artifactId>formatter-maven-plugin</artifactId>
+                        <configuration>
+                            <directories>
+                                <directory>${project.build.sourceDirectory}</directory>
+                                <directory>${project.build.directory}/generated-sources</directory>
+                            </directories>
+                        </configuration>
+                    </plugin>
+
         </plugins>
     </build>
 </project>

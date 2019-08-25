@@ -2,7 +2,13 @@ package self.erp.ui.fxutils;
 
 import javafx.animation.FadeTransition;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
@@ -46,5 +52,31 @@ public class ComponentUtils {
         for (TextInputControl textInputControl : textInputControls) {
             textInputControl.clear();
         }
+    }
+
+    /**
+     * Creates a standard update modal for any type of module . The size and the fields to include will be implemented
+     * by the end user. This just creates a standard modal and freezes the background UI .
+     * 
+     * @param parentStage
+     *            : The parent stage on which this modal is used .
+     * @return : The modal as a Stage .
+     */
+    @Deprecated
+    public static Stage createUpdateModal(AnchorPane parentStage) {
+        Stage updateModal = new Stage();
+        Button closeButton = new Button("Exit");
+        closeButton.setMaxSize(50, 50);
+        closeButton.setCancelButton(true);
+        updateModal.setWidth(500);
+        updateModal.setHeight(250);
+        updateModal.setX(parentStage.getWidth() / 2 + updateModal.getWidth() / 6);
+        updateModal.setY(parentStage.getHeight() / 2 - updateModal.getHeight() / 2);
+        updateModal.initOwner(parentStage.getScene().getWindow());
+        updateModal.initModality(Modality.APPLICATION_MODAL);
+        updateModal.initStyle(StageStyle.UNDECORATED);
+        Scene scene = new Scene(closeButton, 500, 250);
+        updateModal.setScene(scene);
+        return updateModal;
     }
 }

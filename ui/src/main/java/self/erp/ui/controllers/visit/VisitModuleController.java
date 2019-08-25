@@ -1,11 +1,17 @@
-package self.erp.ui.controllers;
+package self.erp.ui.controllers.visit;
 
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import jfxtras.scene.control.LocalDateTimeTextField;
 import jfxtras.scene.control.LocalTimePicker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +76,9 @@ public class VisitModuleController {
     private TableView<Visit> visitGrid;
 
     @FXML
+    private AnchorPane visitStage;
+
+    @FXML
     public void initialize() {
         todayDateLabel.setText(LocalDate.now().format(DATE_FORMAT));
         Visit[] visitors = (Visit[]) restfulHelper.get("http://localhost:8880/erp/visit/visitors", Visit[].class);
@@ -79,8 +88,20 @@ public class VisitModuleController {
         visitGrid.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("fromDate"));
         visitGrid.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("endDate"));
         visitGrid.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("visitPurpose"));
-        int lastVisitID = (Integer) restfulHelper.get("http://localhost:8880/erp/visit/lastVisitID", Integer.class);
 
+    }
+
+    @FXML
+    private void updateVisitModal() throws Exception {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(this.getClass().getResource("/fxmls/visits-update.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.setTitle("My modal window");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner((visitStage.getScene().getWindow()));
+        stage.show();
     }
 
     /**

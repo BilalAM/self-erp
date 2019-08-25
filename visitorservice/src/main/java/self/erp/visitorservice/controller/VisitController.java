@@ -11,6 +11,7 @@ import self.erp.visitorservice.repositories.Visit;
 import self.erp.visitorservice.repositories.VisitRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +29,18 @@ public class VisitController {
         LOGGER.log(Level.INFO, "Adding [ " + visit.toString() + " ]");
         visitRepository.save(visit);
         return new ResponseEntity<>("Added", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/visitor/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Visit> getOne(@PathVariable(name = "id") int id) {
+        Optional<Visit> visit;
+        LOGGER.log(Level.INFO, "Looking up visitor id [ " + id + " ]");
+        visit = visitRepository.findById(id);
+        if (visit.isPresent()) {
+            return new ResponseEntity<Visit>(visit.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(visit.orElse(new Visit()), HttpStatus.NOT_FOUND);
+        }
     }
 
     /**

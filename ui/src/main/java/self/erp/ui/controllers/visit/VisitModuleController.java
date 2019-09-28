@@ -1,14 +1,12 @@
 package self.erp.ui.controllers.visit;
 
 import javafx.animation.FadeTransition;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -81,14 +79,14 @@ public class VisitModuleController {
     @FXML
     public void initialize() {
         todayDateLabel.setText(LocalDate.now().format(DATE_FORMAT));
-        Visit[] visitors = (Visit[]) restfulHelper.get("http://localhost:8880/erp/visit/visitors", Visit[].class);
-        list = FXCollections.observableArrayList(visitors);
-        visitGrid.setItems(list);
-        visitGrid.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("visitorName"));
-        visitGrid.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("fromDate"));
-        visitGrid.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("endDate"));
-        visitGrid.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("visitPurpose"));
-
+        /*
+         * Visit[] visitors = (Visit[]) restfulHelper.get("http://localhost:8880/erp/visit/visitors", Visit[].class);
+         * list = FXCollections.observableArrayList(visitors); visitGrid.setItems(list);
+         * visitGrid.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("visitorName"));
+         * visitGrid.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("fromDate"));
+         * visitGrid.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("endDate"));
+         * visitGrid.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("visitPurpose"));
+         */
     }
 
     @FXML

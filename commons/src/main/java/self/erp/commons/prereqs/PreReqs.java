@@ -40,7 +40,7 @@ public class PreReqs {
             }
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Something went wrong", e);
+            throw new RuntimeException("Halting execution of program , logs : ", e);
         }
     }
-
 }

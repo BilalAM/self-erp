@@ -3,15 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>utilities</artifactId>
+        <artifactId>self-erp</artifactId>
         <groupId>self.erp</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>commons</artifactId>
-    <packaging>jar</packaging>
-    <groupId>self.erp.utilities.commons</groupId>
+    <groupId>self.erp.commons</groupId>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -39,23 +38,5 @@
             <version>2.26</version>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>self.erp</groupId>
-                <artifactId>databaseinstall-maven-plugin</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-                <executions>
-                    <execution>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>install-db</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
 
 </project>

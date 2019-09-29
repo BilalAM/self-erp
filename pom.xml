@@ -68,6 +68,6 @@
         <module>visitorservice</module>
         <module>erpapplication</module>
         <module>communicationservice</module>
-        <module>utilities</module>
+        <module>commons</module>
     </modules>
 </project>

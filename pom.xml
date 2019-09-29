@@ -64,10 +64,10 @@
     </build>
 
     <modules>
+        <module>commons</module>
         <module>ui</module>
         <module>visitorservice</module>
         <module>erpapplication</module>
         <module>communicationservice</module>
-        <module>commons</module>
     </modules>
 </project>

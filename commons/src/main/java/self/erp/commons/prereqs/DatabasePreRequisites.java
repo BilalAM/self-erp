@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  *
  * @author : BilalAM
  */
-public class PreReqs {
+public class DatabasePreRequisites {
     private static final Logger LOGGER = Logger.getLogger("PreReqs");
     private static final String SUDO_PASSWORD = "mib";
     private static final String START_MYSQL_SERVICE = "echo \"" + SUDO_PASSWORD + "\"| sudo -S systemctl start mysqld ";

@@ -12,11 +12,13 @@ import java.util.logging.Logger;
  * @author : BilalAM
  */
 public class DatabasePreRequisites {
+
     private static final Logger LOGGER = Logger.getLogger("PreReqs");
     private static final String SUDO_PASSWORD = "mib";
     private static final String START_MYSQL_SERVICE = "echo \"" + SUDO_PASSWORD + "\"| sudo -S systemctl start mysqld ";
     private static final String BASH_PREFIX = "/bin/bash";
     private static final String C_FLAG = "-c";
+    private static final String WHICH_MYSQL = "which mysql";
 
     /**
      * Starts the MySQL service AS ROOT USER .
@@ -41,6 +43,31 @@ public class DatabasePreRequisites {
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Something went wrong", e);
             throw new RuntimeException("Halting execution of program , logs : ", e);
+        }
+    }
+
+    /**
+     * Check if mysql is installed or not . Executes which command to see .
+     * @return : true if which mysql returns the path of the installed binary .
+     *           false if it returns nothing , which means mysql is not installed .
+     */
+    public static boolean doesMySQLExists(){
+        Process whichCommandProcess;
+        int statusCode = 100;
+        try{
+            String[] whichCommand = new String[]{BASH_PREFIX,C_FLAG,WHICH_MYSQL};
+            whichCommandProcess = Runtime.getRuntime().exec(whichCommand);
+            String outputOfCommand = IOUtils.toString(whichCommandProcess.getInputStream(),"UTF-8");
+            if(outputOfCommand.contains("/mysql")){
+                LOGGER.log(Level.INFO,"mysql is installed [ " + outputOfCommand + "  ] ");
+                return true;
+            }else{
+                LOGGER.log(Level.SEVERE,"mysql is not installed !");
+                return false;
+            }
+        }catch (Exception exception){
+            LOGGER.log(Level.SEVERE,"Something has gone wrong !",exception);
+            throw new RuntimeException(exception);
         }
     }
 }

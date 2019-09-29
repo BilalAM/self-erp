@@ -1,6 +1,7 @@
 package self.erp.visitorservice.controller;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -12,21 +13,19 @@ import self.erp.visitorservice.repositories.VisitRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(value = "/visit")
 public class VisitController {
 
-    private static final Logger LOGGER = Logger.getLogger("VisitController");
+    private static final org.apache.log4j.Logger LOGGER = Logger.getLogger("VisitController");
 
     @Autowired
     private VisitRepository visitRepository;
 
     @RequestMapping(value = "/new", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> insert(@RequestBody Visit visit) {
-        LOGGER.log(Level.INFO, "Adding [ " + visit.toString() + " ]");
+        LOGGER.info("Adding [ " + visit.toString() + " ]");
         visitRepository.save(visit);
         return new ResponseEntity<>("Added", HttpStatus.OK);
     }
@@ -34,7 +33,7 @@ public class VisitController {
     @RequestMapping(value = "/visitor/{id}", method = RequestMethod.GET)
     public ResponseEntity<Visit> getOne(@PathVariable(name = "id") int id) {
         Optional<Visit> visit;
-        LOGGER.log(Level.INFO, "Looking up visitor id [ " + id + " ]");
+        LOGGER.info("Looking up visitor id [ " + id + " ]");
         visit = visitRepository.findById(id);
         if (visit.isPresent()) {
             return new ResponseEntity<Visit>(visit.get(), HttpStatus.OK);
@@ -56,15 +55,15 @@ public class VisitController {
         List<Visit> allVisits;
         try {
             if (StringUtils.isEmpty(sortByField)) {
-                LOGGER.log(Level.WARNING, "No sorting field found");
+                LOGGER.warn("No sorting field found");
                 allVisits = visitRepository.findAll(Sort.by(Sort.Order.by("visitorName")));
             } else {
-                LOGGER.log(Level.WARNING, "Bringing records according to [ " + sortByField + " ]");
+                LOGGER.warn("Bringing records according to [ " + sortByField + " ]");
                 allVisits = visitRepository.findAll(Sort.by(Sort.Order.by(sortByField)));
             }
         } catch (Exception ioE) {
             String errorMessage = "Something has gone horribly wrong :(";
-            LOGGER.log(Level.SEVERE, errorMessage, ioE);
+            LOGGER.error(errorMessage, ioE);
             throw new RuntimeException(errorMessage);
         }
         return new ResponseEntity<>(allVisits, HttpStatus.OK);
@@ -78,7 +77,7 @@ public class VisitController {
             return new ResponseEntity<>(lastVisitID, HttpStatus.OK);
         } catch (Exception e) {
             String errorMessage = "Unable to find last ID of visitor record";
-            LOGGER.log(Level.INFO, errorMessage, e);
+            LOGGER.error(errorMessage, e);
             throw new RuntimeException(errorMessage);
         }
     }

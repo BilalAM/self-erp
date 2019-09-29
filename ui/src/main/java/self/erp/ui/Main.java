@@ -5,13 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This is the main entry point of the Springboot JavaFX application .
@@ -28,7 +26,7 @@ import java.util.logging.Logger;
 @SpringBootApplication
 @ComponentScan(value = { "self.erp.commons.restful", "self.erp.ui.controllers" })
 public class Main extends Application {
-    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
+    private static final org.apache.log4j.Logger LOGGER = Logger.getLogger(Main.class.getName());
 
     private ConfigurableApplicationContext configurableApplicationContext;
     private Parent root;
@@ -42,7 +40,7 @@ public class Main extends Application {
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-        LOGGER.log(Level.INFO, "Java Version [ " + System.getProperty("java.version") + " ] with JavaFx version [ "
+        LOGGER.info("Java Version [ " + System.getProperty("java.version") + " ] with JavaFx version [ "
                 + System.getProperty("javafx.version") + " ]");
     }
 

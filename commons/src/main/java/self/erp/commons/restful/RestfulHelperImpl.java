@@ -36,13 +36,16 @@ public class RestfulHelperImpl implements RestfulHelper {
             downloadedFile = new File(pathToDownloadWithName);
             if(!downloadedFile.exists()){
                 downloadedFile.createNewFile();
+                downloadedFileResponse = client.target(url).request(MediaType.APPLICATION_OCTET_STREAM_TYPE)
+                        .get();
+                IOUtils.copy(downloadedFileResponse.readEntity(InputStream.class),new FileOutputStream(downloadedFile));
+            }else{
+                return downloadedFile;
             }
-            downloadedFileResponse = client.target(url).request(MediaType.APPLICATION_OCTET_STREAM_TYPE)
-                    .get();
-            IOUtils.copy(downloadedFileResponse.readEntity(InputStream.class),new FileOutputStream(downloadedFile));
         }catch (Exception e){
             e.printStackTrace();
         }
         return downloadedFile;
     }
+
 }

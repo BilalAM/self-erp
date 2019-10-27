@@ -88,7 +88,6 @@ public class VisitModuleController {
         visitGrid.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("fromDate"));
         visitGrid.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("endDate"));
         visitGrid.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("visitPurpose"));
-
     }
 
     @FXML

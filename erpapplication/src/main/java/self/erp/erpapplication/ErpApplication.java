@@ -15,9 +15,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaRepositories(basePackages = { "self.erp.visitorservice.repositories" })
 @EntityScan(basePackages = { "self.erp.visitorservice.repositories" })
-@SpringBootApplication(scanBasePackages = { "self.erp.visitorservice.controller",
-        "self.erp.communicationservice.controller" })
-@ComponentScan(basePackages = { "self.erp.commons" })
+@SpringBootApplication
+@ComponentScan(basePackages = { "self.erp.commons" , "self.erp.visitorservice.controller" , "self.erp.communicationservice.controller"} )
 public class ErpApplication {
 
     public static void main(String[] args) {

@@ -29,20 +29,20 @@ public class RestfulHelperImpl implements RestfulHelper {
     }
 
     @Override
-    public File getFile(String url , String pathToDownloadWithName){
+    public File getFile(String url, String pathToDownloadWithName) {
         File downloadedFile = null;
         Response downloadedFileResponse = null;
-        try{
+        try {
             downloadedFile = new File(pathToDownloadWithName);
-            if(!downloadedFile.exists()){
+            if (!downloadedFile.exists()) {
                 downloadedFile.createNewFile();
-                downloadedFileResponse = client.target(url).request(MediaType.APPLICATION_OCTET_STREAM_TYPE)
-                        .get();
-                IOUtils.copy(downloadedFileResponse.readEntity(InputStream.class),new FileOutputStream(downloadedFile));
-            }else{
+                downloadedFileResponse = client.target(url).request(MediaType.APPLICATION_OCTET_STREAM_TYPE).get();
+                IOUtils.copy(downloadedFileResponse.readEntity(InputStream.class),
+                        new FileOutputStream(downloadedFile));
+            } else {
                 return downloadedFile;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return downloadedFile;

@@ -4,12 +4,16 @@ import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import self.erp.commons.restful.RestfulHelper;
+import self.erp.commons.toolbox.StringTools;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContextListener;
-import java.io.File;
+import java.io.InputStream;
+import java.util.Map;
 
 /**
  * A class that is responsible for pre-loading and configuration MYSQL server on startup of the ErpApplication. This
@@ -19,16 +23,20 @@ import java.io.File;
  * @author : BilalAM
  */
 @Component
+@PropertySource(value = "classpath:common.application.properties")
 public class DatabasePreRequisites implements ServletContextListener {
 
     @Value("${bash.root.password}")
     private String sudoPassword;
 
     @Autowired
+    private ResourceLoader resourceLoader;
+
+    @Autowired
     private RestfulHelper restfulHelper;
 
     private static final Logger LOGGER = Logger.getLogger(DatabasePreRequisites.class.getClass());
-    private static final String START_MYSQL_SERVICE = "echo \"" + "%s" + "\"| sudo -S systemctl start mysql";
+    private static String START_MYSQL_SERVICE = "echo \"" + "%s" + "\"| sudo service mysql start ";
     private static final String BASH_PREFIX = "/bin/bash";
     private static final String C_FLAG = "-c";
     private static final String WHICH_MYSQL = "which mysql";
@@ -40,6 +48,7 @@ public class DatabasePreRequisites implements ServletContextListener {
      */
     @PostConstruct
     public void startMysqlService() {
+        installMYSQL();
         LOGGER.info("Starting up mysql service on host as sudo user [ " + sudoPassword + " ]");
         int returnCode = -100;
         try {
@@ -88,23 +97,17 @@ public class DatabasePreRequisites implements ServletContextListener {
         }
     }
 
-    private File downloadMySQL() {
-        File mysqlBinary = new File(MYSQL_BINARY_PATH);
+    public void installMYSQL() {
         try {
-            if (mysqlBinary.isFile()) {
-                return mysqlBinary;
-            } else {
-                mysqlBinary = restfulHelper.getFile(MYSQL_DOWNLOAD_LINK, MYSQL_BINARY_PATH);
-                return mysqlBinary;
-            }
+            InputStream installMysqlFileStream = resourceLoader
+                    .getResource("classpath:mysql-install-script-template.txt").getInputStream();
+            String installMysqlString = IOUtils.toString(installMysqlFileStream, "UTF-8");
+            String a = StringTools.replaceString(installMysqlString,
+                    Map.of("password", "mib", "mysql-password", "p@ssw0rd"));
+            System.out.println(a);
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
-        return mysqlBinary;
-    }
-
-    private void installMYSQL() {
-
     }
 
 }

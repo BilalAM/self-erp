@@ -11,17 +11,18 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * spring application context Just run this as a simple jar .
  *
  * Component scan is done for the DatabasePreRequisites class .
+ *
+ * @author BilalAM (github.com/BilalAM)
  */
 
 @EnableJpaRepositories(basePackages = { "self.erp.visitorservice.repositories" })
 @EntityScan(basePackages = { "self.erp.visitorservice.repositories" })
 @SpringBootApplication
-@ComponentScan(basePackages = { "self.erp.commons" , "self.erp.visitorservice.controller" , "self.erp.communicationservice.controller"} )
+@ComponentScan(basePackages = { "self.erp.commons", "self.erp.visitorservice.controller",
+        "self.erp.communicationservice.controller" })
 public class ErpApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ErpApplication.class, args);
-
     }
-
 }

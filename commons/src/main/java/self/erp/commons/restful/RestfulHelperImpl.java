@@ -12,6 +12,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
+/**
+ * @author BilalAM (github.com/BilalAM)
+ */
 @Service
 public class RestfulHelperImpl implements RestfulHelper {
 

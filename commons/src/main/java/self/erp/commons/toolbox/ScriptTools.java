@@ -7,6 +7,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
+/**
+ * A class that is responsible for executing shell commands.
+ *
+ * @author BilalAM (github.com/BilalAM)
+ */
 public class ScriptTools {
 
     private static final String BASH_PREFIX = "/bin/bash";
@@ -23,13 +28,13 @@ public class ScriptTools {
             process = Runtime.getRuntime().exec(whichCommand);
             String line = null;
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            while((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 System.out.println(line);
             }
 
             String errorLine = null;
             BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            while((errorLine = errorReader.readLine()) != null){
+            while ((errorLine = errorReader.readLine()) != null) {
                 System.out.println(errorLine);
             }
             statusCode = process.waitFor();

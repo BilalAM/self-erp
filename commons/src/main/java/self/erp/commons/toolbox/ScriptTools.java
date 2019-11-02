@@ -3,6 +3,8 @@ package self.erp.commons.toolbox;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class ScriptTools {
@@ -19,6 +21,17 @@ public class ScriptTools {
             String[] whichCommand = new String[] { BASH_PREFIX, C_FLAG, command };
             LOGGER.info("Starting to execute command [ " + Arrays.toString(whichCommand) + " ]");
             process = Runtime.getRuntime().exec(whichCommand);
+            String line = null;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            while((line = reader.readLine()) != null){
+                System.out.println(line);
+            }
+
+            String errorLine = null;
+            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            while((errorLine = errorReader.readLine()) != null){
+                System.out.println(errorLine);
+            }
             statusCode = process.waitFor();
             if (statusCode == 0) {
                 LOGGER.info("Executed succesfully , return code [ " + statusCode + " ]");

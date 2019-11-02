@@ -86,7 +86,7 @@ public class DatabasePreRequisites implements ServletContextListener {
                     .getResource("classpath:mysql-install-script-template.txt").getInputStream();
             String installMysqlTemplate = IOUtils.toString(installMysqlFileStream, "UTF-8");
             String installMysqlScript = StringTools.replaceString(installMysqlTemplate,
-                    Map.of("password", sudoPassword, "mysql-password", mysqlPassword));
+                    Map.of("password", sudoPassword, "mysql.password", mysqlPassword));
             ScriptTools.execute(installMysqlScript);
         } catch (Exception e) {
             LOGGER.error("Something has gone wrong ! ", e);

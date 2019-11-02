@@ -1,6 +1,6 @@
-export DEBIAN_FRONTEND=noninteractive
-echo '${password}' | sudo -E apt-get -q -y install mysql-server
-echo '${password}' | sudo mysql -u root -p -e "use mysql; ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '${mysql-password}';"
-echo '${password}' | sudo service mysql stop
-echo '${password}' | sudo service mysql start
-mysql -u root -p${mysql-password}
+export DEBIAN_FRONTEND=noninteractive;
+echo '${password}' | sudo -S -E apt-get -q -y install mysql-server;
+echo '${password}' | sudo -S mysql -u root -p -e "use mysql; ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '${mysql-password}';";
+echo '${password}' | sudo -S service mysql stop;
+echo '${password}' | sudo -S service mysql start;
+mysqld --version;

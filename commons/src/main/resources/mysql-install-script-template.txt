@@ -4,3 +4,4 @@ echo '${password}' | sudo -S mysql -u root -p${password} -e "use mysql; ALTER US
 echo '${password}' | sudo -S service mysql stop;
 echo '${password}' | sudo -S service mysql start;
 mysqld --version;
+mysql -u root -p${mysql.password} -e "${database.creation.script}"

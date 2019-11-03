@@ -80,13 +80,30 @@ public class DatabasePreRequisites implements ServletContextListener {
         }
     }
 
+    /**
+     * Installs mysql , creates the ERP database , creates the tables and populates them with seed data .
+     *
+     * The database-creation-script.txt is called for creating the database and the mysql-install-script-template is
+     * called for installing mysql .
+     *
+     */
     private void installMYSQL() {
+        InputStream installMysqlFileStream;
+        InputStream databaseCreationScriptStream = null;
+        String installMysqlTemplate = "";
+        String installMysqlScript = "";
+        String databaseCreationScript = "";
         try {
-            InputStream installMysqlFileStream = resourceLoader
-                    .getResource("classpath:mysql-install-script-template.txt").getInputStream();
-            String installMysqlTemplate = IOUtils.toString(installMysqlFileStream, "UTF-8");
-            String installMysqlScript = StringTools.replaceString(installMysqlTemplate,
-                    Map.of("password", sudoPassword, "mysql.password", mysqlPassword));
+
+            installMysqlFileStream = resourceLoader.getResource("classpath:mysql-install-script-template.txt")
+                    .getInputStream();
+            databaseCreationScriptStream = resourceLoader.getResource("classpath:database-creation-script.txt")
+                    .getInputStream();
+
+            installMysqlTemplate = IOUtils.toString(installMysqlFileStream, "UTF-8");
+            databaseCreationScript = IOUtils.toString(databaseCreationScriptStream, "UTF-8");
+            installMysqlScript = StringTools.replaceString(installMysqlTemplate, Map.of("password", sudoPassword,
+                    "mysql.password", mysqlPassword, "database.creation.script", databaseCreationScript));
             ScriptTools.execute(installMysqlScript);
         } catch (Exception e) {
             LOGGER.error("Something has gone wrong ! ", e);
